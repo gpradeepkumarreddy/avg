@@ -235,20 +235,6 @@
       line-height: 1.6;
     }
 
-    .example {
-      margin-top: 18px;
-      padding: 18px;
-      border-radius: 18px;
-      background: rgba(251, 191, 36, 0.08);
-      border: 1px solid rgba(251, 191, 36, 0.18);
-      color: #fff5d6;
-      line-height: 1.6;
-    }
-
-    .example strong {
-      color: #fde68a;
-    }
-
     @media (max-width: 860px) {
       .layout {
         grid-template-columns: 1fr;
@@ -360,8 +346,7 @@
       }
 
       .result-card,
-      .formula,
-      .example {
+      .formula {
         padding: 12px;
         border-radius: 14px;
       }
@@ -376,14 +361,9 @@
       }
 
       .result-note,
-      .formula,
-      .example {
+      .formula {
         font-size: 0.82rem;
         line-height: 1.35;
-      }
-
-      .example {
-        margin-top: 10px;
       }
     }
   </style>
@@ -461,7 +441,6 @@
         </div>
 
         <div class="formula" id="formulaText"></div>
-        <div class="example" id="exampleText"></div>
       </aside>
     </section>
   </main>
@@ -481,8 +460,7 @@
       capitalRequired: document.getElementById("capitalRequired"),
       totalPremium: document.getElementById("totalPremium"),
       addedCapital: document.getElementById("addedCapital"),
-      formulaText: document.getElementById("formulaText"),
-      exampleText: document.getElementById("exampleText")
+      formulaText: document.getElementById("formulaText")
     };
 
     const stepper = {
@@ -539,11 +517,6 @@
         `New average = ((${whole(currentContracts)} × ${money(currentPrice)}) + ` +
         `(${whole(buyContracts)} × ${money(buyPrice)})) ÷ ${whole(totalContracts || 1)}<br>` +
         `= ${money(average)} per contract premium`;
-
-      output.exampleText.innerHTML =
-        `<strong>Example:</strong> if you hold ${whole(currentContracts)} contracts at ${money(currentPrice)} ` +
-        `and buy ${whole(buyContracts)} more at ${money(buyPrice)}, your new average premium becomes ` +
-        `<strong>${money(average)}</strong>.`;
     }
 
     Object.values(fields).forEach((input) => {
