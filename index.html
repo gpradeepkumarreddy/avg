@@ -124,6 +124,39 @@
       position: relative;
     }
 
+    .stepper {
+      display: grid;
+      grid-template-columns: 44px minmax(0, 1fr) 44px;
+      gap: 8px;
+      align-items: center;
+    }
+
+    .stepper input {
+      text-align: center;
+      padding-left: 12px;
+      padding-right: 12px;
+    }
+
+    .stepper-btn {
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      background: rgba(255, 255, 255, 0.06);
+      color: var(--text);
+      border-radius: 14px;
+      height: 54px;
+      font-size: 1.4rem;
+      line-height: 1;
+      cursor: pointer;
+      transition: transform 160ms ease, border-color 160ms ease, background 160ms ease;
+    }
+
+    .stepper-btn:hover,
+    .stepper-btn:focus-visible {
+      border-color: rgba(94, 234, 212, 0.65);
+      background: rgba(255, 255, 255, 0.1);
+      transform: translateY(-1px);
+      outline: none;
+    }
+
     .prefix {
       position: absolute;
       left: 14px;
@@ -296,6 +329,17 @@
         font-size: 0.95rem;
       }
 
+      .stepper {
+        grid-template-columns: 38px minmax(0, 1fr) 38px;
+        gap: 6px;
+      }
+
+      .stepper-btn {
+        height: 46px;
+        border-radius: 12px;
+        font-size: 1.2rem;
+      }
+
       .money input {
         padding-left: 28px;
       }
@@ -374,8 +418,10 @@
 
           <div class="field">
             <label for="buyContracts">Contracts to buy now</label>
-            <div class="input-wrap">
+            <div class="stepper">
+              <button class="stepper-btn" id="buyContractsDecrease" type="button" aria-label="Decrease contracts to buy">-</button>
               <input id="buyContracts" type="number" min="0" step="1" value="3">
+              <button class="stepper-btn" id="buyContractsIncrease" type="button" aria-label="Increase contracts to buy">+</button>
             </div>
           </div>
 
@@ -427,6 +473,11 @@
       exampleText: document.getElementById("exampleText")
     };
 
+    const stepper = {
+      decrease: document.getElementById("buyContractsDecrease"),
+      increase: document.getElementById("buyContractsIncrease")
+    };
+
     const money = (value) =>
       new Intl.NumberFormat("en-US", {
         style: "currency",
@@ -441,6 +492,11 @@
     function readNumber(input) {
       const value = Number.parseFloat(input.value);
       return Number.isFinite(value) && value >= 0 ? value : 0;
+    }
+
+    function setBuyContracts(nextValue) {
+      fields.buyContracts.value = Math.max(0, Math.round(nextValue));
+      calculate();
     }
 
     function calculate() {
@@ -477,6 +533,14 @@
 
     Object.values(fields).forEach((input) => {
       input.addEventListener("input", calculate);
+    });
+
+    stepper.decrease.addEventListener("click", () => {
+      setBuyContracts(readNumber(fields.buyContracts) - 1);
+    });
+
+    stepper.increase.addEventListener("click", () => {
+      setBuyContracts(readNumber(fields.buyContracts) + 1);
     });
 
     calculate();
