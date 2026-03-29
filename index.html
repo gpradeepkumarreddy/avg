@@ -201,6 +201,10 @@
       border: 1px solid rgba(255, 255, 255, 0.08);
     }
 
+    .result-card.wide {
+      grid-column: 1 / -1;
+    }
+
     .result-label {
       display: block;
       font-size: 0.84rem;
@@ -446,7 +450,13 @@
           <div class="result-card">
             <span class="result-label">Total contracts after buy</span>
             <div class="result-value" id="totalContracts">0</div>
-            <div class="result-note" id="addedCapital">$0 added now</div>
+            <div class="result-note" id="totalPremium">$0 total premium cost basis</div>
+          </div>
+
+          <div class="result-card wide">
+            <span class="result-label">Capital needed for this buy</span>
+            <div class="result-value" id="capitalRequired">$0.00</div>
+            <div class="result-note" id="addedCapital">$0 per contract x 0 contracts</div>
           </div>
         </div>
 
@@ -468,6 +478,8 @@
       newAverage: document.getElementById("newAverage"),
       averagePerContract: document.getElementById("averagePerContract"),
       totalContracts: document.getElementById("totalContracts"),
+      capitalRequired: document.getElementById("capitalRequired"),
+      totalPremium: document.getElementById("totalPremium"),
       addedCapital: document.getElementById("addedCapital"),
       formulaText: document.getElementById("formulaText"),
       exampleText: document.getElementById("exampleText")
@@ -510,6 +522,7 @@
       const totalContracts = currentContracts + buyContracts;
       const average = totalContracts > 0 ? (existingCost + newCost) / totalContracts : 0;
       const addedCapital = newCost * 100;
+      const totalPremiumCostBasis = (existingCost + newCost) * 100;
 
       output.newAverage.textContent = money(average);
       output.averagePerContract.textContent =
@@ -518,7 +531,9 @@
           : "Add contracts to calculate a new average";
 
       output.totalContracts.textContent = whole(totalContracts);
-      output.addedCapital.textContent = `${money(addedCapital)} added now`;
+      output.capitalRequired.textContent = money(addedCapital);
+      output.totalPremium.textContent = `${money(totalPremiumCostBasis)} total premium cost basis`;
+      output.addedCapital.textContent = `${money(buyPrice * 100)} per contract x ${whole(buyContracts)} contracts`;
 
       output.formulaText.innerHTML =
         `New average = ((${whole(currentContracts)} × ${money(currentPrice)}) + ` +
