@@ -221,9 +221,121 @@
       .hero {
         padding: 28px 20px 18px;
       }
+    }
+
+    @media (max-width: 640px) {
+      body {
+        padding: 10px;
+        align-items: start;
+      }
+
+      .shell {
+        border-radius: 20px;
+      }
+
+      .hero {
+        padding: 16px 16px 12px;
+      }
+
+      .eyebrow {
+        padding: 6px 10px;
+        font-size: 0.72rem;
+      }
+
+      h1 {
+        margin: 10px 0 0;
+        font-size: 1.75rem;
+        max-width: none;
+      }
+
+      .subcopy {
+        display: none;
+      }
+
+      .layout {
+        gap: 12px;
+        padding: 12px;
+      }
+
+      .panel {
+        padding: 14px;
+        border-radius: 18px;
+      }
+
+      .panel h2 {
+        font-size: 1rem;
+        margin-bottom: 4px;
+      }
+
+      .panel p {
+        margin-bottom: 12px;
+        font-size: 0.88rem;
+        line-height: 1.35;
+      }
+
+      aside.panel {
+        order: -1;
+      }
 
       .grid {
-        grid-template-columns: 1fr;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 10px;
+      }
+
+      .field {
+        gap: 6px;
+      }
+
+      .field label {
+        font-size: 0.8rem;
+      }
+
+      input {
+        padding: 12px 12px;
+        border-radius: 14px;
+        font-size: 0.95rem;
+      }
+
+      .money input {
+        padding-left: 28px;
+      }
+
+      .prefix {
+        left: 11px;
+        font-size: 0.9rem;
+      }
+
+      .results {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 10px;
+        margin-bottom: 10px;
+      }
+
+      .result-card,
+      .formula,
+      .example {
+        padding: 12px;
+        border-radius: 14px;
+      }
+
+      .result-label {
+        margin-bottom: 6px;
+        font-size: 0.72rem;
+      }
+
+      .result-value {
+        font-size: 1.35rem;
+      }
+
+      .result-note,
+      .formula,
+      .example {
+        font-size: 0.82rem;
+        line-height: 1.35;
+      }
+
+      .example {
+        margin-top: 10px;
       }
     }
   </style>
